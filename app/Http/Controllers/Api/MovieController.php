@@ -31,4 +31,28 @@ class MovieController extends Controller
             'movie' => Movie::find($movie_id)
         ]);
     }
+
+    public function addOrRemoveToFavoriteMovie(Request $request)
+    {
+        $user = $request->user();
+
+        $favorites = $user->getFavoriteMovies()->get();
+
+        return response()->json([
+           'message' => 'success',
+           'favorites' => $favorites
+        ]);
+    }
+
+    public function getFavoriteMovies(Request $request)
+    {
+        $user = $request->user();
+
+        $favorites = $user->getFavoriteMovies()->get();
+
+        return response()->json([
+            'message' => 'success',
+            'favorites' => $favorites
+        ]);
+    }
 }

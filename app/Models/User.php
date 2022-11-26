@@ -51,4 +51,9 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getFavoriteMovies()
+    {
+        return $this->belongsToMany(Movie::class, 'favorites', 'user_id', 'movie_id');
+    }
 }

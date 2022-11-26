@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/auth/status', [AuthController::class, 'status']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/register', [AuthController::class, 'register']);
+Route::put('/auth/change-personal-data', [AuthController::class, 'changeUserData']);
 
 Route::get('/movie/featured', [MovieController::class, 'getFeaturedMovies']);
 Route::get('/movie/popular', [MovieController::class, 'getPopularMovies']);

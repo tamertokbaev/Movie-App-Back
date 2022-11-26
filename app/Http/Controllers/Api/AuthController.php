@@ -68,6 +68,21 @@ class AuthController extends Controller
         ]);
     }
 
+    public function changeUserData(Request $request)
+    {
+        $user = $request->user();
+        $userNeedsToUpdate = User::find($user->id);
+
+        $userNeedsToUpdate->name = $request->name;
+        $userNeedsToUpdate->email = $request->email;
+
+        $userNeedsToUpdate->save();
+        return response()->json([
+            'message' => 'success',
+            'user' => $userNeedsToUpdate
+        ]);
+    }
+
     protected function respondWithToken($token)
     {
         return ([

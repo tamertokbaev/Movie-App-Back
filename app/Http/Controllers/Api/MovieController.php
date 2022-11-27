@@ -59,4 +59,18 @@ class MovieController extends Controller
             'favorites' => $favorites
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $slug = $request->slug;
+        $results =
+            Movie::where('title', 'like', '%'.$slug.'%')
+                ->orWhere('description', 'like', '%'.$slug.'%')
+                ->get();
+
+        return response()->json([
+            'message' => 'success',
+            'results' => $results
+        ]);
+    }
 }

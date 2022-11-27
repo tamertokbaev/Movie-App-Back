@@ -10,8 +10,8 @@ class MovieController extends Controller
     public function getFeaturedMovies()
     {
         return response()->json([
-           'message' => 'success',
-           'movies' => Movie::whereNotNull('banner_url')->take(12)->get()
+            'message' => 'success',
+            'movies' => Movie::whereNotNull('banner_url')->take(12)->get()
         ]);
     }
 
@@ -35,12 +35,16 @@ class MovieController extends Controller
     public function addOrRemoveToFavoriteMovie(Request $request)
     {
         $user = $request->user();
+        $movieId = $request->movie_id;
+
+        $user
+            ->getFavoriteMovies()
+            ->toggle([$movieId]);
 
         $favorites = $user->getFavoriteMovies()->get();
-
         return response()->json([
-           'message' => 'success',
-           'favorites' => $favorites
+            'message' => 'success',
+            'favorites' => $favorites
         ]);
     }
 

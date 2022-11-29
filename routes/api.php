@@ -28,6 +28,7 @@ Route::get('/movie/info', [MovieController::class, 'getMovieInfo']);
 Route::post('/movie/favorites', [MovieController::class, 'addOrRemoveToFavoriteMovie']);
 Route::get('/movie/favorites', [MovieController::class, 'getFavoriteMovies']);
 Route::get('/movie/search', [MovieController::class, 'search']);
+Route::get('/movie/similar', [MovieController::class, 'similar']);
 
 Route::post('/admin/movie/create', [AdminController::class, 'createMovie']);
 Route::get('/admin/movie/list', [AdminController::class, 'getListOfMovies']);

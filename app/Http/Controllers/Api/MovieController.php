@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
 {
@@ -71,6 +72,19 @@ class MovieController extends Controller
         return response()->json([
             'message' => 'success',
             'results' => $results
+        ]);
+    }
+
+    public function similar(Request $request)
+    {
+        $movies = DB::table('movies')
+            ->orderBy('rating', 'desc')
+            ->take(5)
+            ->get();
+
+        return response()->json([
+           'message' => 'success',
+           'movies' => $movies
         ]);
     }
 }

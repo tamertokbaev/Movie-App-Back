@@ -35,10 +35,12 @@ Route::get('/admin/movie/list', [AdminController::class, 'getListOfMovies']);
 Route::get('/admin/movie', [AdminController::class, 'getMovie']);
 Route::put('/admin/movie/update', [AdminController::class, 'updateMovie']);
 Route::delete('/admin/movie/delete', [AdminController::class, 'deleteMovie']);
+Route::get('/admin/movie/all', [AdminController::class, 'getAllMovies']);
+
 
 Route::post('/admin/genre/create', [AdminController::class, 'createGenre']);
 Route::get('/admin/genre/list', [AdminController::class, 'getListOfGenres']);
 Route::get('/admin/genre', [AdminController::class, 'getGenre']);
 Route::put('/admin/genre/update', [AdminController::class, 'updateGenre']);
 Route::delete('/admin/genre/delete', [AdminController::class, 'deleteGenre']);
-
+Route::post('/admin/genre/toggle', [AdminController::class, 'attachOrToggleMovie']);

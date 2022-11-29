@@ -60,6 +60,14 @@ class AdminController extends Controller
         ]);
     }
 
+    public function getAllMovies(Request $request)
+    {
+        return response()->json([
+           'message' => 'success',
+           'movies' => Movie::all()
+        ]);
+    }
+
     public function deleteMovie(Request $request)
     {
         $movie_id = $request->movie_id;
@@ -115,7 +123,7 @@ class AdminController extends Controller
         $rows = $request->rows;
         $offset = $request->page * $rows;
 
-        $result = Genre::orderBy('updated_at', 'desc');
+        $result = Genre::with('movie')->orderBy('updated_at', 'desc');
 
         $count = $result->count();
         $items = $result
@@ -163,6 +171,24 @@ class AdminController extends Controller
         return response()->json([
             'message' => 'success',
             'genre_id' => $genre_id
+        ]);
+    }
+
+    public function attachOrToggleMovie(Request $request)
+    {
+        $movie_id = $request->movie_id;
+        $genre_id = $request->genre_id;
+
+        $movie = Movie::find($movie_id);
+        $genre = Genre::find($genre_id);
+
+        if (isset($movie)) {
+            $movie->getGenresRelatedToMovie()->toggle([$genre_id]);
+        }
+
+        return response()->json([
+           'message' => 'success',
+           'movies' => $genre->getRelatedMovies()->get()
         ]);
     }
 }

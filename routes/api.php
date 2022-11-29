@@ -24,6 +24,7 @@ Route::put('/auth/change-personal-data', [AuthController::class, 'changeUserData
 
 Route::get('/movie/featured', [MovieController::class, 'getFeaturedMovies']);
 Route::get('/movie/popular', [MovieController::class, 'getPopularMovies']);
+Route::get('/movie/last-released', [MovieController::class, 'getLastReleasedMovies']);
 Route::get('/movie/info', [MovieController::class, 'getMovieInfo']);
 Route::post('/movie/favorites', [MovieController::class, 'addOrRemoveToFavoriteMovie']);
 Route::get('/movie/favorites', [MovieController::class, 'getFavoriteMovies']);

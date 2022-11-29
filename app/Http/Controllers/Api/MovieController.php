@@ -24,6 +24,14 @@ class MovieController extends Controller
         ]);
     }
 
+    public function getLastReleasedMovies()
+    {
+        return response()->json([
+           'message' => 'success',
+           'movies' => Movie::orderBy('updated_at', 'desc')->take(36)->get()
+        ]);
+    }
+
     public function getMovieInfo(Request $request)
     {
         $movie_id = $request->movie_id;

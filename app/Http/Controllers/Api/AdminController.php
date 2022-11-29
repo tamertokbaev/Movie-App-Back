@@ -123,7 +123,7 @@ class AdminController extends Controller
         $rows = $request->rows;
         $offset = $request->page * $rows;
 
-        $result = Genre::with('movie')->orderBy('updated_at', 'desc');
+        $result = Genre::with('movies')->orderBy('updated_at', 'desc');
 
         $count = $result->count();
         $items = $result

@@ -29,7 +29,7 @@ class MovieController extends Controller
         $movie_id = $request->movie_id;
         return response()->json([
             'message' => 'success',
-            'movie' => Movie::find($movie_id)
+            'movie' => Movie::with('genres')->where('id', $movie_id)->first()
         ]);
     }
 

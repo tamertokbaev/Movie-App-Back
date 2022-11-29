@@ -56,7 +56,7 @@ class AdminController extends Controller
         $movieId = $request->movie_id;
         return response()->json([
             'message' => 'success',
-            'movie' => Movie::find($movieId)
+            'movie' => Movie::with('genres')->where('id', $movieId)->first()
         ]);
     }
 

@@ -19,6 +19,7 @@ class AdminController extends Controller
                 'banner_url' => $request->banner_url,
                 'imdb_url' => $request->imdb_url,
                 'release_date' => $request->release_date,
+                'preview_url' => $request->preview_url
             ]);
 
             return response()->json([
@@ -90,6 +91,7 @@ class AdminController extends Controller
             'image_url' => $request->image_url,
             'release_date' => $request->release_date,
             'banner_url' => $request->banner_url,
+            'preview_url' => $request->preview_url
         ]);
 
 

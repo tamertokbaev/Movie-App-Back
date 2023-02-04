@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MovieController;
-use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +22,10 @@ Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::put('/auth/change-personal-data', [AuthController::class, 'changeUserData']);
 
+Route::post('/user/subscribe', [UserController::class, 'subscribe']);
+Route::get('user/followers', [UserController::class, 'getUserFollowers']);
+Route::get('user/subscriptions', [UserController::class, 'getUserSubscriptions']);
+
 Route::get('/movie/featured', [MovieController::class, 'getFeaturedMovies']);
 Route::get('/movie/popular', [MovieController::class, 'getPopularMovies']);
 Route::get('/movie/last-released', [MovieController::class, 'getLastReleasedMovies']);
@@ -31,17 +35,17 @@ Route::get('/movie/favorites', [MovieController::class, 'getFavoriteMovies']);
 Route::get('/movie/search', [MovieController::class, 'search']);
 Route::get('/movie/similar', [MovieController::class, 'similar']);
 
-Route::post('/admin/movie/create', [AdminController::class, 'createMovie']);
-Route::get('/admin/movie/list', [AdminController::class, 'getListOfMovies']);
-Route::get('/admin/movie', [AdminController::class, 'getMovie']);
-Route::put('/admin/movie/update', [AdminController::class, 'updateMovie']);
-Route::delete('/admin/movie/delete', [AdminController::class, 'deleteMovie']);
-Route::get('/admin/movie/all', [AdminController::class, 'getAllMovies']);
+Route::post('/admin/movie/create', [UserController::class, 'createMovie']);
+Route::get('/admin/movie/list', [UserController::class, 'getListOfMovies']);
+Route::get('/admin/movie', [UserController::class, 'getMovie']);
+Route::put('/admin/movie/update', [UserController::class, 'updateMovie']);
+Route::delete('/admin/movie/delete', [UserController::class, 'deleteMovie']);
+Route::get('/admin/movie/all', [UserController::class, 'getAllMovies']);
 
 
-Route::post('/admin/genre/create', [AdminController::class, 'createGenre']);
-Route::get('/admin/genre/list', [AdminController::class, 'getListOfGenres']);
-Route::get('/admin/genre', [AdminController::class, 'getGenre']);
-Route::put('/admin/genre/update', [AdminController::class, 'updateGenre']);
-Route::delete('/admin/genre/delete', [AdminController::class, 'deleteGenre']);
-Route::post('/admin/genre/toggle', [AdminController::class, 'attachOrToggleMovie']);
+Route::post('/admin/genre/create', [UserController::class, 'createGenre']);
+Route::get('/admin/genre/list', [UserController::class, 'getListOfGenres']);
+Route::get('/admin/genre', [UserController::class, 'getGenre']);
+Route::put('/admin/genre/update', [UserController::class, 'updateGenre']);
+Route::delete('/admin/genre/delete', [UserController::class, 'deleteGenre']);
+Route::post('/admin/genre/toggle', [UserController::class, 'attachOrToggleMovie']);

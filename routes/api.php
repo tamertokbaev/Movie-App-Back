@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MovieController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\PlaylistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,11 @@ Route::put('/auth/change-personal-data', [AuthController::class, 'changeUserData
 Route::post('/user/subscribe', [UserController::class, 'subscribe']);
 Route::get('user/followers', [UserController::class, 'getUserFollowers']);
 Route::get('user/subscriptions', [UserController::class, 'getUserSubscriptions']);
+
+Route::post('playlists/store', [PlaylistController::class, 'store']);
+Route::put('playlists/update', [PlaylistController::class, 'update']);
+Route::delete('playlists/delete', [PlaylistController::class, 'delete']);
+Route::get('playlists', [PlaylistController::class, 'getUserPlaylists']);
 
 Route::get('/movie/featured', [MovieController::class, 'getFeaturedMovies']);
 Route::get('/movie/popular', [MovieController::class, 'getPopularMovies']);

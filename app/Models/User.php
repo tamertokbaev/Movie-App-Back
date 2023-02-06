@@ -66,4 +66,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany(User::class, 'user_subscriptions', 'follower_id', 'user_id');
     }
+
+    public function getPlaylists()
+    {
+        return $this->hasMany(Playlist::class);
+    }
 }

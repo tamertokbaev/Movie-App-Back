@@ -23,6 +23,34 @@ class PlaylistController extends Controller
         ]);
     }
 
+    public function toggleMovie(Request $request)
+    {
+        $movie_id = $request->movie_id;
+        $playlist_id = $request->playlist_id;
+
+        $playlist = Playlist::find($playlist_id)
+            ->getRelatedMovies()
+            ->toggle([$movie_id]);
+
+        return response()->json([
+            'message' => 'success',
+            'playlist' => $playlist
+        ]);
+    }
+
+    public function getPlaylistMovies(Request $request)
+    {
+        $playlist_id = $request->playlist_id;
+
+        $movies = Playlist::find($playlist_id)
+            ->getRelatedMovies()->get();
+
+        return response()->json([
+            'message' => 'success',
+            'movies' => $movies
+        ]);
+    }
+
     public function update(Request $request)
     {
         $playlist_id = $request->playlist_id;
@@ -62,5 +90,11 @@ class PlaylistController extends Controller
             'message' => 'success',
             'playlists' => $playlists
         ]);
+    }
+
+    public function getListOfFeaturedPlaylists()
+    {
+
+
     }
 }

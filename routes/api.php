@@ -27,10 +27,14 @@ Route::post('/user/subscribe', [UserController::class, 'subscribe']);
 Route::get('user/followers', [UserController::class, 'getUserFollowers']);
 Route::get('user/subscriptions', [UserController::class, 'getUserSubscriptions']);
 
-Route::post('playlists/store', [PlaylistController::class, 'store']);
-Route::put('playlists/update', [PlaylistController::class, 'update']);
-Route::delete('playlists/delete', [PlaylistController::class, 'delete']);
+Route::post('playlists', [PlaylistController::class, 'store']);
+Route::post('playlists/toggle-movie', [PlaylistController::class, 'toggleMovie']);
+Route::get('playlists/get-movies', [PlaylistController::class, 'getPlaylistMovies']);
+Route::get('playlists/get-user-playlists', [PlaylistController::class, 'getUserPlaylists']);
+Route::put('playlists', [PlaylistController::class, 'update']);
+Route::delete('playlists', [PlaylistController::class, 'delete']);
 Route::get('playlists', [PlaylistController::class, 'getUserPlaylists']);
+Route::get('playlists/featured');
 
 Route::get('/movie/featured', [MovieController::class, 'getFeaturedMovies']);
 Route::get('/movie/popular', [MovieController::class, 'getPopularMovies']);

@@ -14,4 +14,9 @@ class Playlist extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    public function getRelatedMovies()
+    {
+        return $this->belongsToMany(Movie::class, 'playlist_movies', 'playlist_id', 'movie_id');
+    }
 }

@@ -12,11 +12,16 @@ class Playlist extends Model
 
     public function author()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class, "user_id", "id");
     }
 
     public function getRelatedMovies()
     {
         return $this->belongsToMany(Movie::class, 'playlist_movies', 'playlist_id', 'movie_id');
+    }
+
+    public function subscribers()
+    {
+        return $this->belongsToMany(User::class, 'playlist_users', 'playlist_id', 'user_id');
     }
 }

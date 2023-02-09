@@ -34,7 +34,9 @@ Route::get('playlists/get-user-playlists', [PlaylistController::class, 'getUserP
 Route::put('playlists', [PlaylistController::class, 'update']);
 Route::delete('playlists', [PlaylistController::class, 'delete']);
 Route::get('playlists', [PlaylistController::class, 'getUserPlaylists']);
-Route::get('playlists/featured');
+Route::get('playlists/featured', [PlaylistController::class, 'getListOfFeaturedPlaylists']);
+Route::get('playlists/item', [PlaylistController::class, 'getPlaylistDetail']);
+Route::post('playlists/subscribe', [PlaylistController::class, 'togglePlaylistSubscription']);
 
 Route::get('/movie/featured', [MovieController::class, 'getFeaturedMovies']);
 Route::get('/movie/popular', [MovieController::class, 'getPopularMovies']);

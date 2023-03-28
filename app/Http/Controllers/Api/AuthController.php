@@ -50,8 +50,8 @@ class AuthController extends Controller
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
+                'subscription' => $request->subscription,
                 'password' => Hash::make($request->password),
-                'subscription' => $request->subscription
             ]);
         } catch (QueryException $e) {
             return response()->json([

@@ -15,7 +15,7 @@ class PlaylistController extends Controller
         $user = $request->user();
         $image = $request->preview_image;
         $fileName = $image->hashName();
-        $path = 'storage/uploads/'.$fileName;
+        $path = 'http://localhost:8000/storage/playlists/'.$fileName;
         $image->store('playlists');
         $playlist = Playlist::create([
             'playlist_name' => $request->playlist_name,

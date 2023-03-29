@@ -37,6 +37,9 @@ Route::get('playlists', [PlaylistController::class, 'getUserPlaylists']);
 Route::get('playlists/featured', [PlaylistController::class, 'getListOfFeaturedPlaylists']);
 Route::get('playlists/item', [PlaylistController::class, 'getPlaylistDetail']);
 Route::post('playlists/subscribe', [PlaylistController::class, 'togglePlaylistSubscription']);
+Route::get('playlists/check_mine', [PlaylistController::class, 'checkIfPlaylistIsMine']);
+Route::get('playlists/get_personalized_playlists', [PlaylistController::class, 'getPersonalizedPlaylists']);
+Route::get('playlists/get_added_playlists', [PlaylistController::class, 'getMyPlaylists']);
 
 Route::get('/movie/featured', [MovieController::class, 'getFeaturedMovies']);
 Route::get('/movie/popular', [MovieController::class, 'getPopularMovies']);

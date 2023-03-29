@@ -5,16 +5,23 @@ namespace App\Http\Controllers\Api;
 use App\Models\Movie;
 use App\Models\Playlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use function PHPUnit\Framework\isNull;
 
 class PlaylistController extends Controller
 {
     public function store(Request $request)
     {
         $user = $request->user();
+        $image = $request->preview_image;
+        $fileName = $image->hashName();
+        $path = 'storage/uploads/'.$fileName;
+        $image->store('playlists');
         $playlist = Playlist::create([
             'playlist_name' => $request->playlist_name,
             'description' => $request->description,
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'preview_url' => $path
         ]);
 
         return response()->json([
@@ -41,9 +48,17 @@ class PlaylistController extends Controller
     public function getPlaylistMovies(Request $request)
     {
         $playlist_id = $request->playlist_id;
+        $user = $request->user();
+
+        if ($user->subscription == 0) {
+
+        } else {
+
+        }
 
         $movies = Playlist::find($playlist_id)
-            ->getRelatedMovies()->get();
+            ->getRelatedMovies()
+            ->get();
 
         return response()->json([
             'message' => 'success',
@@ -92,6 +107,19 @@ class PlaylistController extends Controller
         ]);
     }
 
+    public function checkIfPlaylistIsMine(Request $request)
+    {
+        $user = $request->user();
+        $playlist_id = $request->playlist_id;
+
+        $playlist = Playlist::find($playlist_id);
+
+        return response()->json([
+           'message' => 'success',
+            'result' => $playlist->user_id == $user->id
+        ]);
+    }
+
     public function getListOfFeaturedPlaylists()
     {
 
@@ -99,8 +127,37 @@ class PlaylistController extends Controller
             'message' => 'success',
             'playlists' => Playlist::with('getRelatedMovies')
                 ->orderByDesc('subscribers')
-                ->take(10)
                 ->get()
+        ]);
+    }
+
+    public function getPersonalizedPlaylists()
+    {
+        $popularIds = DB::table('playlist_movies')
+            ->select('playlist_id')
+            ->from('playlist_movies')
+            ->groupBy('playlist_id')
+            ->orderByRaw('count(*) desc')
+            ->take(15)
+            ->get();
+        $popularMergedIds = [];
+        foreach ($popularIds as $id) {
+            $popularMergedIds[] = $id->playlist_id;
+        }
+        $playlists = Playlist::whereIn('id', $popularMergedIds)->get();
+        return response()->json([
+           'message' => 'success',
+            'result' => $playlists
+        ]);
+    }
+
+    public function getMyPlaylists(Request $request)
+    {
+        $user = $request->user();
+
+        return response()->json([
+           'message' => 'success',
+            'playlists' => $user->getPlaylists()->get()
         ]);
     }
 
@@ -125,9 +182,16 @@ class PlaylistController extends Controller
             ->with('subscribers')
             ->first();
 
+        $count = DB::table('playlist_users')
+            ->selectRaw('count(user_id) as subscribersCount')
+            ->where('playlist_id', $playlist_id)
+            ->first()
+            ->subscribersCount;
+
         return response()->json([
             'message' => 'success',
-            'playlist' => $playlist
+            'playlist' => $playlist,
+            'subscribers' => $count
         ]);
     }
 }

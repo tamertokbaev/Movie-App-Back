@@ -66,6 +66,15 @@ class PlaylistController extends Controller
         ]);
     }
 
+    public function getSubscribedAuthors(Request $request)
+    {
+
+        return response()->json([
+            'message' => 'success',
+
+        ]);
+    }
+
     public function update(Request $request)
     {
         $playlist_id = $request->playlist_id;

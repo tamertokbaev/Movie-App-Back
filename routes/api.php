@@ -50,17 +50,17 @@ Route::get('/movie/favorites', [MovieController::class, 'getFavoriteMovies']);
 Route::get('/movie/search', [MovieController::class, 'search']);
 Route::get('/movie/similar', [MovieController::class, 'similar']);
 
-Route::post('/admin/movie/create', [UserController::class, 'createMovie']);
-Route::get('/admin/movie/list', [UserController::class, 'getListOfMovies']);
-Route::get('/admin/movie', [UserController::class, 'getMovie']);
-Route::put('/admin/movie/update', [UserController::class, 'updateMovie']);
-Route::delete('/admin/movie/delete', [UserController::class, 'deleteMovie']);
-Route::get('/admin/movie/all', [UserController::class, 'getAllMovies']);
+Route::post('/admin/movie/create', [\App\Http\Controllers\Api\AdminController::class, 'createMovie']);
+Route::get('/admin/movie/list', [\App\Http\Controllers\Api\AdminController::class, 'getListOfMovies']);
+Route::get('/admin/movie', [\App\Http\Controllers\Api\AdminController::class, 'getMovie']);
+Route::put('/admin/movie/update', [\App\Http\Controllers\Api\AdminController::class, 'updateMovie']);
+Route::delete('/admin/movie/delete', [\App\Http\Controllers\Api\AdminController::class, 'deleteMovie']);
+Route::get('/admin/movie/all', [\App\Http\Controllers\Api\AdminController::class, 'getAllMovies']);
 
 
-Route::post('/admin/genre/create', [UserController::class, 'createGenre']);
-Route::get('/admin/genre/list', [UserController::class, 'getListOfGenres']);
-Route::get('/admin/genre', [UserController::class, 'getGenre']);
-Route::put('/admin/genre/update', [UserController::class, 'updateGenre']);
-Route::delete('/admin/genre/delete', [UserController::class, 'deleteGenre']);
-Route::post('/admin/genre/toggle', [UserController::class, 'attachOrToggleMovie']);
+Route::post('/admin/genre/create', [\App\Http\Controllers\Api\AdminController::class, 'createGenre']);
+Route::get('/admin/genre/list', [\App\Http\Controllers\Api\AdminController::class, 'getListOfGenres']);
+Route::get('/admin/genre', [\App\Http\Controllers\Api\AdminController::class, 'getGenre']);
+Route::put('/admin/genre/update', [\App\Http\Controllers\Api\AdminController::class, 'updateGenre']);
+Route::delete('/admin/genre/delete', [\App\Http\Controllers\Api\AdminController::class, 'deleteGenre']);
+Route::post('/admin/genre/toggle', [\App\Http\Controllers\Api\AdminController::class, 'attachOrToggleMovie']);

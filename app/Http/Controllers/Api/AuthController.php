@@ -98,7 +98,8 @@ class AuthController extends Controller
         return [
             'name' => $user->name,
             'email' => $user->email,
-            'is_superuser' => $user->is_superuser
+            'is_superuser' => $user->is_superuser,
+            'subscription' => $user->subscription
         ];
     }
 }

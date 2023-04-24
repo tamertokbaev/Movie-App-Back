@@ -37,6 +37,7 @@ class AuthController extends Controller
     public function status()
     {
         $user = User::find(auth()->id());
+        logger("user attempt".$user);
         if ($user) return response()->json([
             'message' => 'success',
             'user' => $this->respondUserInfo($user)

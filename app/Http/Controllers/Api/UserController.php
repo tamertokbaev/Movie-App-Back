@@ -86,6 +86,9 @@ class UserController extends Controller
             DB::table('user_family')->insert([
                 ['email' => $email, 'user_id' => $user->id]
             ]);
+            DB::table('users')
+                ->where('id', $userToAdd->id)
+                ->update(['subscription' => 3]);
             return response()->json([
                 'message' => 'success'
             ]);

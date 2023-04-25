@@ -26,6 +26,8 @@ Route::put('/auth/change-personal-data', [AuthController::class, 'changeUserData
 Route::post('/user/subscribe', [UserController::class, 'subscribe']);
 Route::get('user/followers', [UserController::class, 'getUserFollowers']);
 Route::get('user/subscriptions', [UserController::class, 'getUserSubscriptions']);
+Route::get('user/family', [UserController::class, 'getMailsForFamilySubscriptions']);
+Route::post('user/family_add', [UserController::class, 'addNewUserIntoFamilySubscription']);
 
 Route::post('playlists', [PlaylistController::class, 'store']);
 Route::post('playlists/toggle-movie', [PlaylistController::class, 'toggleMovie']);

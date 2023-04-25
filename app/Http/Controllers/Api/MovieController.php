@@ -75,6 +75,7 @@ class MovieController extends Controller
         $results =
             Movie::where('title', 'like', '%'.$slug.'%')
                 ->orWhere('description', 'like', '%'.$slug.'%')
+                ->take(15)
                 ->get();
 
         return response()->json([

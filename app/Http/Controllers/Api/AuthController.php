@@ -49,6 +49,7 @@ class AuthController extends Controller
     {
         try {
             $user = User::create([
+                'id' => $request->id,
                 'name' => $request->name,
                 'email' => $request->email,
                 'subscription' => $request->subscription,
@@ -97,6 +98,7 @@ class AuthController extends Controller
     protected function respondUserInfo($user)
     {
         return [
+            'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
             'is_superuser' => $user->is_superuser,

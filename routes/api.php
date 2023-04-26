@@ -51,6 +51,8 @@ Route::post('/movie/favorites', [MovieController::class, 'addOrRemoveToFavoriteM
 Route::get('/movie/favorites', [MovieController::class, 'getFavoriteMovies']);
 Route::get('/movie/search', [MovieController::class, 'search']);
 Route::get('/movie/similar', [MovieController::class, 'similar']);
+Route::get('/movie/genres', [MovieController::class, 'getGenres']);
+Route::get('/movie/by_genre', [MovieController::class, 'getMoviesByGenre']);
 
 Route::post('/admin/movie/create', [\App\Http\Controllers\Api\AdminController::class, 'createMovie']);
 Route::get('/admin/movie/list', [\App\Http\Controllers\Api\AdminController::class, 'getListOfMovies']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Genre;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -94,6 +95,25 @@ class MovieController extends Controller
         return response()->json([
            'message' => 'success',
            'movies' => $movies
+        ]);
+    }
+
+    public function getGenres()
+    {
+        return response()->json([
+           'message' => 'success',
+           'genres' => Genre::all()
+        ]);
+    }
+
+    public function getMoviesByGenre(Request $request)
+    {
+        $genreId = $request->genreId;
+
+
+        return response()->json([
+           'message' => 'success',
+           'movies' => Genre::find($genreId)->movies()->take(15)->get()
         ]);
     }
 }
